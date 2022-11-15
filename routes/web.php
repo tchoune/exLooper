@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExerciseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,3 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::resource('exercises', ExerciseController::class)->except(['show', 'edit', 'update']);
