@@ -4,15 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+enum ExerciseState {
+    case building;
+    case answering;
+    case closed;
+}
+
 class Exercise extends Model
 {
-    enum State {
-        case building;
-        case answering;
-        case closed;
-    }
-
     protected $casts = [
-        'state' => State::class,
+        'state' => ExerciseState::class,
     ];
 }
