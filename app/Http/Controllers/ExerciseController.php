@@ -14,9 +14,8 @@ class ExerciseController extends Controller
      */
     public function index()
     {
-        //
         $exercises = Exercise::all();
-        return view('exercises', ['exercises' => $exercises]);
+        return view('exercises.index', ['exercises' => $exercises]);
     }
 
     /**
@@ -26,7 +25,7 @@ class ExerciseController extends Controller
      */
     public function create()
     {
-        //
+        return view('index.blade');
     }
 
     /**
@@ -37,7 +36,11 @@ class ExerciseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Exercise::create([
+            'title' => $request->title,
+            'state' => 'building'
+            ]);
+        return back()->with('success', 'Exercise created successfully.');
     }
 
     /**
@@ -48,6 +51,7 @@ class ExerciseController extends Controller
      */
     public function destroy(Exercise $exercise)
     {
-        //
+        $exercise->delete();
+        return redirect()->route('exercises.index');
     }
 }
