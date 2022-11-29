@@ -9,27 +9,34 @@
     </div>
 @endif
 
+
 <form method="POST" action="{{route('exercises.store')}}">
     @method('POST')
     @csrf
-    <label>Title</label><input type="text" name="title" />
-    <input type="submit" value="create">
+    <div class="mb-3">
+        <label>Title</label>
+        <input type="text" name="title" class="form-control @error('title') is-invalid @enderror"/>
+        <input type="submit" value="create">
+
+    </div>
+    <div class="mb-3">
+        @error('title')
+        <span class="text-danger">{{ $message }}</span>
+        @endif
+    </div>
+
 </form>
-
-
-
-
 
 <ul>
     @foreach ($exercises as $exercise)
-    <li>{{ $exercise->title }} ||  
-        <form method="POST" action="{{route('exercises.destroy', [$exercise->id])}}">
-            @method('DELETE')
-            @csrf    
-        <button type="submit">Delete</button></form></li>
+        <li>
+            <a href="{{route('fields.index', $exercise->id)}}">{{ $exercise->title }} ||  
+                <form method="POST" action="{{route('exercises.destroy', [$exercise])}}">
+                    @method('DELETE')
+                    @csrf    
+                <button type="submit">Delete</button>
+                </form>
+            </a>
+        </li>
     @endforeach
 </ul>
-
-
-
-

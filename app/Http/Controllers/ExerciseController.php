@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exercise;
+use App\Models\Field;
 use Illuminate\Http\Request;
 
 class ExerciseController extends Controller
@@ -25,7 +26,7 @@ class ExerciseController extends Controller
      */
     public function create()
     {
-        return view('index.blade');
+        return view('exercises.index');
     }
 
     /**
@@ -36,10 +37,13 @@ class ExerciseController extends Controller
      */
     public function store(Request $request)
     {
-        Exercise::create([
-            'title' => $request->title,
-            'state' => 'building'
-            ]);
+        Exercise::create(
+            $request->validate(['title' => 'required|unique:exercises|max:255', 'title.required' => 'Title field is required', 'title.unique' => 'Exercises Title is already created']),
+            [
+                'title' => $request->title,
+                'state' => 'building'
+            ]
+        );
         return back()->with('success', 'Exercise created successfully.');
     }
 
