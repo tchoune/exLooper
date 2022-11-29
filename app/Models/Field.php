@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 enum FieldsTypeValue : string
 {
-    case singleLine = 'single_line';
-    case multiLine = 'multi_line';
-    case singleLineList = 'single_line_list';
+    case single_line = 'single_line';
+    case multi_line = 'multi_line';
+    case single_line_list = 'single_line_list';
 }
 
 class Field extends Model

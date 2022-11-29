@@ -38,14 +38,9 @@ class FieldController extends Controller
     public function store(Request $request, Exercise $exercise)
     {
         //
-        $field = new Field();
-        $field->label = $request->label;
-        $field->value_type = $request->value_type;
-        $field->exercise_id = $exercise->id;
+        $exercise->fields()->create($request->all());
 
-        $field->save();
-
-        return back()->with('message', 'Le nouveau field a été créé !');
+        return redirect()->route('fields.index', compact('exercise'))->with('message', 'Le nouveau field a été créé !');
     }
 
     /**
