@@ -36,5 +36,4 @@
     </table>
 </div>
 
-
 <a href=" {{ route('fields.create', $exercise)}}">Créer un field</a>
